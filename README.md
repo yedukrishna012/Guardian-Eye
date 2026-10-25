@@ -170,6 +170,14 @@ See [Guardian_Eye_Documentation.md](Guardian_Eye_Documentation.md) for the full 
 
 ---
 
+## 📜 License
+
+Released under the MIT License. See [LICENSE](LICENSE) for details.
+
+Copyright (c) 2026 Yedukrishna R (@yedukrishna012)
+
+---
+
 ## 👥 Credits
 
 Built as a college project by **Yedukrishna**, **Jubin T Joseph**, and **Rishijith**.
