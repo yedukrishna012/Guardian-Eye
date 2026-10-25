@@ -1,0 +1,26 @@
+# Python Cache
+__pycache__/
+*.pyc
+
+# Virtual Environments
+venv/
+.venv/
+env/
+.env
+
+# MacOS
+.DS_Store
+
+# IDEs
+.vscode/
+.idea/
+
+# Secret Configuration Files
+service_account.json
+device_config.json
+
+# Vosk speech models (downloaded during setup)
+models/
+
+# Ignore Website folder (this repository is for backend/Pi scripts only)
+website/

@@ -1,0 +1,52 @@
+# Core
+numpy>=1.26,<2.0
+scipy>=1.11
+requests>=2.31
+idna>=3.4
+
+# PyTorch (CPU – adjust if CUDA)
+torch>=2.1,<2.3
+torchaudio>=2.1,<2.3
+torchvision>=0.16,<0.18
+
+# Audio / Speech
+sounddevice>=0.4.6
+pyaudio>=0.2.13
+pydub>=0.25.1
+soundfile>=0.12
+librosa>=0.10.1
+speechrecognition>=3.10.0
+vosk>=0.3.45
+openai-whisper>=20231117
+faster-whisper>=0.10.0
+speechbrain>=0.5.15
+pyttsx3>=2.90
+
+# NLP & Generation
+transformers>=4.36
+langdetect>=1.0.9
+deep-translator>=1.11.4
+google-generativeai>=0.4.0
+Pillow>=10.0.0
+
+# CV / Face
+opencv-python>=4.9
+deepface>=0.0.95
+mtcnn>=1.0.0
+retina-face>=0.0.17
+ultralytics>=8.0.0
+
+# Backend
+Flask>=3.0
+flask-cors>=4.0
+gunicorn>=21.2
+firebase-admin>=6.4.0
+
+# Hardware
+pyserial>=3.5
+
+# Utilities
+tqdm>=4.66
+psutil>=5.9
+rich>=13.7
+python-dotenv>=1.0
