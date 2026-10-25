@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="Guardian Eye">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#101B30"/>
+      <stop offset="1" stop-color="#070B14"/>
+    </linearGradient>
+    <linearGradient id="eye" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#22D3EE"/>
+      <stop offset="0.55" stop-color="#3B82F6"/>
+      <stop offset="1" stop-color="#8B5CF6"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#3B82F6" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#3B82F6" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="soft" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="5"/>
+    </filter>
+  </defs>
+
+  <rect width="128" height="128" rx="30" fill="url(#bg)"/>
+  <rect x="1.5" y="1.5" width="125" height="125" rx="28.5" fill="none" stroke="#FFFFFF" stroke-opacity="0.1" stroke-width="3"/>
+  <circle cx="64" cy="64" r="46" fill="url(#glow)"/>
+
+  <g filter="url(#soft)" opacity="0.5">
+    <path d="M22 64c11-20 25-30 42-30s31 10 42 30c-11 20-25 30-42 30S33 84 22 64Z" fill="none" stroke="url(#eye)" stroke-width="8"/>
+  </g>
+
+  <path d="M22 64c11-20 25-30 42-30s31 10 42 30c-11 20-25 30-42 30S33 84 22 64Z" fill="#04070D" fill-opacity="0.55" stroke="url(#eye)" stroke-width="5" stroke-linejoin="round"/>
+  <circle cx="64" cy="64" r="17.5" fill="url(#eye)"/>
+  <circle cx="64" cy="64" r="8.5" fill="#050912"/>
+  <circle cx="58" cy="57.5" r="4.2" fill="#FFFFFF" fill-opacity="0.9"/>
+  <circle cx="70" cy="70" r="2" fill="#22D3EE" fill-opacity="0.85"/>
+
+  <path d="M99 25l1.8 5.2L106 32l-5.2 1.8L99 39l-1.8-5.2L92 32l5.2-1.8L99 25Z" fill="#22D3EE" fill-opacity="0.9"/>
+  <circle cx="28" cy="100" r="2.5" fill="#8B5CF6" fill-opacity="0.9"/>
+</svg>

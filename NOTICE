@@ -1,0 +1,13 @@
+Guardian Eye
+Copyright (c) 2026 Yedukrishna R (@yedukrishna012)
+
+The Guardian Eye web dashboard in website/ was originally created by
+jubin217 (https://github.com/jubin217) and is included in this project with
+the author's permission. That work is relicensed here under the repository's
+MIT License.
+
+The Guardian Eye name, branding, documentation, and the integration of the
+web dashboard with the Python edge engine are part of Guardian Eye.
+
+Third-party libraries and models retain their own licenses and attribution.
+See package.json, requirements.txt, and the upstream projects for details.

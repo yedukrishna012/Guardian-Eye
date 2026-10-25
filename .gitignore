@@ -21,6 +21,3 @@ device_config.json
 
 # Vosk speech models (downloaded during setup)
 models/
-
-# Ignore Website folder (this repository is for backend/Pi scripts only)
-website/

@@ -1,8 +1,15 @@
 import time
 import sys
 import os
+import hmac
 import warnings
 warnings.filterwarnings('ignore')
+
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
 
 # HACK: Enable system-installed Picamera2 (needs system numpy usually)
 # We do this EARLY, before importing 'fall' OR 'cv2' which might import 'numpy'
@@ -33,7 +40,7 @@ from multiprocessing import Queue
 from fall import SimpleHighAccuracyFallDetector
 from gesture import detect_gesture
 import threading
-from flask import Flask, Response
+from flask import Flask, Response, request
 
 # Required to let React safely request images from Python
 try:
@@ -48,10 +55,33 @@ lock = threading.Lock()
 
 # Minimalist Flask API
 app = Flask(__name__)
+
+# Optional camera protection. Both settings preserve the original permissive
+# LAN behavior when unset.
+STREAM_TOKEN = os.environ.get("CAMERA_STREAM_TOKEN", "").strip()
+_cors_env = os.environ.get("CORS_ORIGINS", "").strip()
+CORS_ORIGINS = [origin.strip() for origin in _cors_env.split(",") if origin.strip()] or "*"
+
 try:
-    CORS(app)
+    CORS(app, origins=CORS_ORIGINS)
 except Exception:
     pass
+
+
+def _is_stream_authorized():
+    if not STREAM_TOKEN:
+        return True
+
+    supplied_token = request.args.get("token", "")
+    if not supplied_token:
+        authorization = request.headers.get("Authorization", "")
+        if authorization.startswith("Bearer "):
+            supplied_token = authorization[7:].strip()
+
+    return bool(supplied_token) and hmac.compare_digest(
+        supplied_token.encode("utf-8"),
+        STREAM_TOKEN.encode("utf-8"),
+    )
 
 def generate_frames():
     """Generator loop converting raw OpenCV matrices into network-friendly multipart JPEG streams."""
@@ -76,6 +106,13 @@ def generate_frames():
 
 @app.route('/video_feed')
 def video_feed():
+    if not _is_stream_authorized():
+        return Response(
+            "Camera stream token is missing or invalid.\n",
+            status=401,
+            mimetype='text/plain',
+        )
+
     return Response(generate_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
@@ -235,7 +272,10 @@ def run_fall_process(event_queue: Queue, cam_index=0, emergency_flag=None):
         daemon=True
     )
     flask_thread.start()
-    print("🌐 Flask live stream server active on port 5000 (/video_feed)")
+    protection = "token required" if STREAM_TOKEN else "no token configured"
+    print(f"🌐 Flask live stream server active on port 5000 (/video_feed, {protection})")
+    if CORS_ORIGINS != "*":
+        print(f"🔒 Camera stream CORS restricted to: {', '.join(CORS_ORIGINS)}")
 
     # ✅ NEW: confirm camera + fall pipeline is alive
     event_queue.put({
